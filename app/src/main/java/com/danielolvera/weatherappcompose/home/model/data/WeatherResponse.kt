@@ -5,7 +5,7 @@ import com.danielolvera.weatherappcompose.home.model.data.Coord
 import com.google.gson.annotations.SerializedName
 
 
-data class WeatherData (
+data class WeatherResponse (
 
     @SerializedName("coord"      ) var coord      : Coord?             = Coord(),
     @SerializedName("weather"    ) var weather    : ArrayList<Weather> = arrayListOf(),
