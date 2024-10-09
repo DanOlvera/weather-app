@@ -9,13 +9,30 @@ import com.danielolvera.weatherappcompose.home.model.state.WeatherState
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(private val weatherRepository: WeatherRepository): ViewModel() {
+
     private val _weatherState = MutableLiveData<WeatherState>()
     val weatherState: LiveData<WeatherState> = _weatherState
 
-    fun fetchWeather(city: String, apiKey: String) {
+    fun fetchWeatherByCity(city: String, apiKey: String) {
         viewModelScope.launch {
-            weatherRepository.getWeather(city, apiKey)
-                .collect { state -> _weatherState.value = state}
+            try {
+                weatherRepository.getWeather(city, apiKey)
+                    .collect { state -> _weatherState.value = state}
+            } catch (e: Exception) {
+                _weatherState.value = WeatherState.Error("Failed to fetch weather with the provided city")
+            }
+        }
+    }
+
+    fun fetchWeatherByLocation(latitud: Double, longitud: Double, apiKey: String) {
+        viewModelScope.launch {
+            try {
+                _weatherState.value = WeatherState.Loading
+                weatherRepository.getWeatherByLocation(latitud, longitud, apiKey)
+                    .collect {state -> _weatherState.value = state}
+            } catch (e: Exception) {
+                _weatherState.value = WeatherState.Error("Failed to fetch weather with the provided location")
+            }
         }
     }
 }
