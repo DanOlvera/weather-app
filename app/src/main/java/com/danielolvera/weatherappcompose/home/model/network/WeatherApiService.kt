@@ -1,7 +1,6 @@
 package com.danielolvera.weatherappcompose.home.model.network
 
-import com.example.example.WeatherResponse
-import retrofit2.Response
+import com.danielolvera.weatherappcompose.home.model.data.WeatherResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
