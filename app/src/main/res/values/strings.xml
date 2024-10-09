@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WeatherAppCompose</string>
+    <string name="search">Search city</string>
 </resources>
