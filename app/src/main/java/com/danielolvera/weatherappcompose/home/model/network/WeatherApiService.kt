@@ -14,7 +14,7 @@ interface WeatherApiService {
     ): WeatherResponse
 
     @GET("weather")
-    fun getWeatherByLocation(
+    suspend fun getWeatherByLocation(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
         @Query("appid") apiKey: String
