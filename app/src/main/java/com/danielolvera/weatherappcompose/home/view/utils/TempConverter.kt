@@ -4,7 +4,7 @@ import java.util.Locale
 
 object TempConverter {
     fun convertKtoF(temp: Double): String {
-        return String.format(Locale.US, format = "%.2f", ((temp - 273.15) * 1.8 + 32))
+        return String.format(Locale.US, format = "%.1f", ((temp - 273.15) * 1.8 + 32))
     }
 
 }
