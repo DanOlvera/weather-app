@@ -105,4 +105,8 @@ dependencies {
 
     implementation("io.coil-kt.coil3:coil-compose:3.0.0-rc01")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.0-rc01")
+    implementation("com.google.android.gms:play-services-location:18.0.0")
+
+    implementation ("androidx.activity:activity-ktx:1.6.1")
+    implementation ("com.google.accompanist:accompanist-permissions:0.24.13-rc")
 }
