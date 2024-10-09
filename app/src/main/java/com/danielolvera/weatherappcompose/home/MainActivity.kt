@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WeatherAppComposeTheme {
                 WeatherScreen(viewModel = weatherViewModel) { city ->
-                    weatherViewModel.fetchWeather(city, apiKey)
+                    weatherViewModel.fetchWeatherByCity(city, apiKey)
                 }
             }
         }
