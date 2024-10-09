@@ -38,11 +38,11 @@ class WeatherViewModel(
         }
     }
 
-    private fun fetchWeatherByLocation(latitud: Double, longitud: Double, apiKey: String) {
+    private fun fetchWeatherByLocation(latitude: Double, longitude: Double, apiKey: String) {
         viewModelScope.launch {
             try {
                 _weatherState.value = WeatherState.Loading
-                weatherRepository.getWeatherByLocation(latitud, longitud, apiKey)
+                weatherRepository.getWeatherByLocation(latitude, longitude, apiKey)
                     .collect {state -> _weatherState.value = state}
             } catch (e: Exception) {
                 _weatherState.value = WeatherState.Error("Failed to fetch weather with the provided location")
