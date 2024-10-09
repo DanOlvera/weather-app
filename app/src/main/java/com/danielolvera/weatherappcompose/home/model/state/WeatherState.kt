@@ -1,6 +1,6 @@
 package com.danielolvera.weatherappcompose.home.model.state
 
-import com.example.example.WeatherResponse
+import com.danielolvera.weatherappcompose.home.model.data.WeatherResponse
 
 sealed class WeatherState {
     data object Loading : WeatherState()
