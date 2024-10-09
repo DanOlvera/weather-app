@@ -22,13 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
-import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.danielolvera.weatherappcompose.R
 import com.danielolvera.weatherappcompose.home.model.state.WeatherState
-import com.danielolvera.weatherappcompose.home.model.utils.WeatherApi
 import com.danielolvera.weatherappcompose.home.view.utils.TempConverter
 import com.danielolvera.weatherappcompose.home.viewmodel.WeatherViewModel
 
@@ -56,7 +53,7 @@ fun WeatherScreen(
                 if (city.isNotEmpty()) {
                     onFetchWeather(city)
                 } else {
-                    Log.d("Dang", "City name is empty! ")
+                    Log.e("WeatherScreen", "City name is empty! ")
                 }
             }
         )
@@ -78,9 +75,8 @@ fun WeatherScreen(
                             it
                         )
                     }
-                Log.d("Dang", "WeatherScreen: $iconUrl")
 
-                // Use Coil to load the image
+                // Use of Coil to load the image
                 Image(
                     painter = rememberAsyncImagePainter(
                         ImageRequest.Builder(LocalContext.current)
@@ -106,5 +102,4 @@ fun WeatherScreen(
             }
         }
     }
-
 }
