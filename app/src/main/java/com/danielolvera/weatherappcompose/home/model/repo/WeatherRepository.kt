@@ -18,4 +18,14 @@ class WeatherRepository (private val weatherApiService: WeatherApiService) {
             emit(WeatherState.Error(e.message ?: "Unknown error. How?"))
         }
     }.flowOn(Dispatchers.IO)
+
+    fun getWeatherByLocation(latitude: Double, longitude: Double, apiKey: String): Flow<WeatherState> = flow {
+        emit(WeatherState.Loading)
+        try {
+            val response = weatherApiService.getWeatherByLocation(latitude, longitude, apiKey)
+            emit(WeatherState.Success(response))
+        } catch (e: Exception) {
+            emit(WeatherState.Error(e.message ?: "Unknown error. How?"))
+        }
+    }.flowOn(Dispatchers.IO)
 }
