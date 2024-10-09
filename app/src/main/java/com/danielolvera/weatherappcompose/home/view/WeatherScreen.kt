@@ -25,14 +25,14 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.danielolvera.weatherappcompose.R
+import com.danielolvera.weatherappcompose.home.intent.WeatherIntent
 import com.danielolvera.weatherappcompose.home.model.state.WeatherState
 import com.danielolvera.weatherappcompose.home.view.utils.TempConverter
 import com.danielolvera.weatherappcompose.home.viewmodel.WeatherViewModel
 
 @Composable
 fun WeatherScreen(
-    viewModel: WeatherViewModel,
-    onFetchWeather: (String) -> Unit
+    viewModel: WeatherViewModel
 ) {
 
     val weatherState by viewModel.weatherState.observeAsState()
@@ -41,7 +41,7 @@ fun WeatherScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp, 48.dp, 16.dp, 16.dp),
+            .padding(16.dp, 115.dp, 16.dp, 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -51,7 +51,7 @@ fun WeatherScreen(
             onTextChange = { searchCity -> city = searchCity},
             onSearchClicked = {
                 if (city.isNotEmpty()) {
-                    onFetchWeather(city)
+                    viewModel.handleIntent(WeatherIntent.FetchWeatherData(city))
                 } else {
                     Log.e("WeatherScreen", "City name is empty! ")
                 }

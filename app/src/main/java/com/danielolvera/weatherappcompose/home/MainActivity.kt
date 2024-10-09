@@ -1,9 +1,14 @@
 package com.danielolvera.weatherappcompose.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.lifecycle.ViewModelProvider
 import com.danielolvera.weatherappcompose.BuildConfig
 import com.danielolvera.weatherappcompose.home.model.network.ApiServiceClient
@@ -17,20 +22,28 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var weatherViewModel: WeatherViewModel
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         val repository = WeatherRepository(ApiServiceClient.apiService)
-        val factory = ViewModelFactory { WeatherViewModel(repository) }
         val apiKey = BuildConfig.API_KEY
+
+        val factory = ViewModelFactory { WeatherViewModel(repository, apiKey) }
 
         weatherViewModel = ViewModelProvider(this, factory)[WeatherViewModel::class.java]
 
         setContent {
-            WeatherAppComposeTheme {
-                WeatherScreen(viewModel = weatherViewModel) { city ->
-                    weatherViewModel.fetchWeatherByCity(city, apiKey)
+
+            Scaffold(
+                topBar = {
+                    TopAppBar(title = { Text("Weather App") })
+                }
+            ) { _ ->
+                WeatherAppComposeTheme {
+                    WeatherScreen(viewModel = weatherViewModel)
                 }
             }
         }
