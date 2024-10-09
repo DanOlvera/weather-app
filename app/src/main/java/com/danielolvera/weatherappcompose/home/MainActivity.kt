@@ -11,10 +11,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.lifecycle.ViewModelProvider
 import com.danielolvera.weatherappcompose.BuildConfig
+import com.danielolvera.weatherappcompose.home.intent.WeatherIntent
 import com.danielolvera.weatherappcompose.home.model.network.ApiServiceClient
 import com.danielolvera.weatherappcompose.home.model.repo.WeatherRepository
 import com.danielolvera.weatherappcompose.home.theme.WeatherAppComposeTheme
 import com.danielolvera.weatherappcompose.home.view.WeatherScreen
+import com.danielolvera.weatherappcompose.home.view.utils.SharedPreferencesManager
 import com.danielolvera.weatherappcompose.home.viewmodel.ViewModelFactory
 import com.danielolvera.weatherappcompose.home.viewmodel.WeatherViewModel
 
@@ -43,9 +45,14 @@ class MainActivity : ComponentActivity() {
                 }
             ) { _ ->
                 WeatherAppComposeTheme {
-                    WeatherScreen(viewModel = weatherViewModel)
+                    WeatherScreen(viewModel = weatherViewModel, this)
                 }
             }
+        }
+
+        val sharedPreference = SharedPreferencesManager(this)
+        sharedPreference.getLastCity()?.let { lastCity ->
+            weatherViewModel.handleIntent(WeatherIntent.FetchWeatherData(lastCity))
         }
     }
 }
