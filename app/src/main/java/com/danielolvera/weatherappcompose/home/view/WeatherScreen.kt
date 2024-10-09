@@ -19,14 +19,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
+import coil3.request.ImageRequest
 import com.danielolvera.weatherappcompose.R
 import com.danielolvera.weatherappcompose.home.model.state.WeatherState
 import com.danielolvera.weatherappcompose.home.model.utils.WeatherApi
+import com.danielolvera.weatherappcompose.home.view.utils.TempConverter
 import com.danielolvera.weatherappcompose.home.viewmodel.WeatherViewModel
 
 @Composable
@@ -69,19 +72,29 @@ fun WeatherScreen(
                 val weather = (weatherState as WeatherState.Success).weatherResponse
 
                 //First we render the image
-                val iconUrl = "http://openweathermap.org/img/w/${weather.weather.firstOrNull()?.icon}.png"
+                val iconUrl =
+                    weather.weather.firstOrNull()?.icon?.let {
+                        stringResource(R.string.icon_url,
+                            it
+                        )
+                    }
                 Log.d("Dang", "WeatherScreen: $iconUrl")
 
+                // Use Coil to load the image
                 Image(
-                    painter = rememberAsyncImagePainter(iconUrl),
+                    painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(LocalContext.current)
+                            .data(iconUrl)
+                            .build()
+                    ),
                     contentDescription = null,
-                    modifier = Modifier.size(64.dp)
+                    modifier = Modifier.size(128.dp)
                 )
 
 
                 //Then we display the text info
                 Text(text = "City: ${weather.name}")
-                Text(text = "Temperature: ${weather.main?.temp}")
+                Text(text = "Temperature: ${weather.main?.temp?.let { TempConverter.convertKtoF(it) }}")
                 Text(text = "Description: ${weather.weather.firstOrNull()?.description}")
 
             }
