@@ -26,11 +26,13 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.danielolvera.weatherappcompose.R
+import com.danielolvera.weatherappcompose.home.MainActivity
 import com.danielolvera.weatherappcompose.home.intent.WeatherIntent
 import com.danielolvera.weatherappcompose.home.model.state.WeatherState
 import com.danielolvera.weatherappcompose.home.view.utils.SharedPreferencesManager
 import com.danielolvera.weatherappcompose.home.view.utils.TempConverter
 import com.danielolvera.weatherappcompose.home.viewmodel.WeatherViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
 
 @Composable
 fun WeatherScreen(
@@ -40,6 +42,12 @@ fun WeatherScreen(
 
     val weatherState by viewModel.weatherState.observeAsState()
     var city by remember { mutableStateOf("") }
+
+    // Fetch weather by location if permission is granted
+    RequestLocationPermission(onPermissionGranted = {
+        // Call method to request user's current location
+        (context as MainActivity).requestUserLocation()
+    })
 
     Column(
         modifier = Modifier
