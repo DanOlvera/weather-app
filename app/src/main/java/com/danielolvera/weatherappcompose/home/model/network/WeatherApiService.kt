@@ -12,4 +12,11 @@ interface WeatherApiService {
         @Query("q") city: String,
         @Query("appid") apiKey: String
     ): WeatherResponse
+
+    @GET("weather")
+    fun getWeatherByLocation(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("appid") apiKey: String
+    ): WeatherResponse
 }
