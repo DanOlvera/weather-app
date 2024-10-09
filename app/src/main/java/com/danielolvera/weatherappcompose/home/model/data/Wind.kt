@@ -1,4 +1,4 @@
-package com.example.example
+package com.danielolvera.weatherappcompose.home.model.data
 
 import com.google.gson.annotations.SerializedName
 
