@@ -1,7 +1,5 @@
-package com.example.example
+package com.danielolvera.weatherappcompose.home.model.data
 
-import com.danielolvera.weatherappcompose.home.model.data.Clouds
-import com.danielolvera.weatherappcompose.home.model.data.Coord
 import com.google.gson.annotations.SerializedName
 
 
