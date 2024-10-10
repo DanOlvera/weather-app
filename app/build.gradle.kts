@@ -109,4 +109,7 @@ dependencies {
 
     implementation ("androidx.activity:activity-ktx:1.6.1")
     implementation ("com.google.accompanist:accompanist-permissions:0.24.13-rc")
+
+    // for Android:
+    testImplementation ("org.amshove.kluent:kluent-android:1.73")
 }

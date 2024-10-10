@@ -11,7 +11,11 @@ object ConverterUtils {
     }
 
     fun timestampToHumanReadable(timestamp: Long?): String {
-        val instant = timestamp?.let { Instant.ofEpochSecond(it) }
+        if (timestamp == null) {
+            return "Invalid timestamp"
+        }
+
+        val instant = Instant.ofEpochSecond(timestamp)
 
         val formatter = DateTimeFormatter.ofPattern("HH:mm:ss a")
             .withZone(ZoneId.systemDefault())
