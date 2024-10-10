@@ -74,7 +74,7 @@ class WeatherRepositoryTest {
         // Act
         val result = weatherRepository.getWeather("New York", "api_key").toList()
 
-        // Assert
+        // Assert Here we need to verify the emitted states
         result[0].shouldBeInstanceOf<WeatherState.Loading>()
         result[1].shouldBeInstanceOf<WeatherState.Success>()
 
@@ -92,7 +92,7 @@ class WeatherRepositoryTest {
         // Act
         val result = weatherRepository.getWeather("InvalidCity", "api_key").toList()
 
-        // Assert: Verify the emitted states
+        // Assert: Here we need to verify the emitted states
         result[0].shouldBeInstanceOf<WeatherState.Loading>()
         result[1].shouldBeInstanceOf<WeatherState.Error>()
 

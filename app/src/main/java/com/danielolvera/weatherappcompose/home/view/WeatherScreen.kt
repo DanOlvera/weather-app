@@ -126,6 +126,7 @@ fun WeatherScreen(
 
                 )
 
+                // We show a grid with weather details. Each cell will have a different piece of weather info.
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     contentPadding = PaddingValues(16.dp)

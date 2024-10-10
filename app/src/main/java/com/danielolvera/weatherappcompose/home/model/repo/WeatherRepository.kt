@@ -10,11 +10,14 @@ import kotlinx.coroutines.flow.flowOn
 class WeatherRepository (private val weatherApiService: WeatherApiService) {
 
     fun getWeather(city: String, apiKey: String): Flow<WeatherState> = flow {
+        // We emit the loading state first to indicate data fetch is in progress.
         emit(WeatherState.Loading)
+        // Try-catch block for safe API call, to make sure everything runs smoothly.
         try {
             val response = weatherApiService.getWeatherByCity(city, apiKey)
             emit(WeatherState.Success(response))
         } catch (e: Exception) {
+            // Uh-oh, something broke. We emit the error state with a descriptive message.
             emit(WeatherState.Error(e.message ?: "Unknown error. How?"))
         }
     }.flowOn(Dispatchers.IO)

@@ -27,6 +27,7 @@ class WeatherViewModel(
         }
     }
 
+    // Trigger the weather fetch when the city is updated.
     private fun fetchWeatherByCity(city: String, apiKey: String) {
         viewModelScope.launch {
             try {
@@ -38,6 +39,7 @@ class WeatherViewModel(
         }
     }
 
+    // Trigger the weather fetch when the app is launched.
     private fun fetchWeatherByLocation(latitude: Double, longitude: Double, apiKey: String) {
         viewModelScope.launch {
             try {
