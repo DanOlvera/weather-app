@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -110,6 +112,11 @@ dependencies {
     implementation ("androidx.activity:activity-ktx:1.6.1")
     implementation ("com.google.accompanist:accompanist-permissions:0.24.13-rc")
 
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation(libs.hilt.navigation.compose)
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+
     // for Android:
     testImplementation ("org.amshove.kluent:kluent-android:1.73")
 
@@ -121,4 +128,8 @@ dependencies {
 
     testImplementation (libs.core.testing)
 
+}
+
+kapt {
+    correctErrorTypes = true
 }
