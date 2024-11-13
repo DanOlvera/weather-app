@@ -6,8 +6,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class WeatherRepository (private val weatherApiService: WeatherApiService) {
+class WeatherRepository @Inject constructor(private val weatherApiService: WeatherApiService) {
 
     fun getWeather(city: String, apiKey: String): Flow<WeatherState> = flow {
         // We emit the loading state first to indicate data fetch is in progress.

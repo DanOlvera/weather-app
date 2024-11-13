@@ -1,8 +1,9 @@
 package com.danielolvera.weatherappcompose.home.view.utils
 
 import android.content.Context
+import javax.inject.Inject
 
-class SharedPreferencesManager(context: Context) {
+class SharedPreferencesManager @Inject constructor(context: Context) {
     private val sharedPreferences = context.getSharedPreferences("weather_prefs", Context.MODE_PRIVATE)
 
     fun saveLastCity(city: String) {

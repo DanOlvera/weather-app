@@ -4,14 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.danielolvera.weatherappcompose.home.di.utils.ApiKey
 import com.danielolvera.weatherappcompose.home.intent.WeatherIntent
 import com.danielolvera.weatherappcompose.home.model.repo.WeatherRepository
 import com.danielolvera.weatherappcompose.home.model.state.WeatherState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherViewModel(
+@HiltViewModel
+class WeatherViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
-    private val apiKey: String): ViewModel() {
+    @ApiKey private val apiKey: String): ViewModel() {
 
     private val _weatherState = MutableLiveData<WeatherState>()
     val weatherState: LiveData<WeatherState> = _weatherState
