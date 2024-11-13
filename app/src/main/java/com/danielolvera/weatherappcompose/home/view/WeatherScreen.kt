@@ -112,7 +112,7 @@ fun WeatherScreen(
                         color = Color.DarkGray,
                         fontWeight = FontWeight.Bold
                     ),
-                    textAlign = TextAlign.Center)
+                    textAlign = TextAlign.Start)
 
                 val weatherItems = listOf(
                     InfoGridItem("Feels like",
@@ -162,7 +162,7 @@ fun GridItemView(item: InfoGridItem) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = item.title, style = MaterialTheme.typography.titleSmall)
+            Text(text = item.title, style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = item.value, style = MaterialTheme.typography.bodyLarge)
         }

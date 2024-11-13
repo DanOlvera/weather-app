@@ -47,19 +47,7 @@ internal fun CityTemperature(
         Column(
             verticalArrangement = Arrangement.Center
         ) {
-            //Then we display the text info
-            Text(
-                text = "${weather.name}",
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth(),
-                style = TextStyle(
-                    fontSize = 32.sp,
-                    color = Color.DarkGray,
-                    fontWeight = FontWeight.Bold
-                ),
-                textAlign = TextAlign.Center
-            )
+
             Text(
                 text = "${weather.main?.temp?.let { ConverterUtils.convertKtoF(it) }}°",
                 modifier = Modifier
@@ -67,6 +55,20 @@ internal fun CityTemperature(
                     .fillMaxWidth(),
                 style = TextStyle(
                     fontSize = 72.sp,
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.Bold
+                ),
+                textAlign = TextAlign.Center
+            )
+
+            //Then we display the text info
+            Text(
+                text = "${weather.name}",
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
+                style = TextStyle(
+                    fontSize = 24.sp,
                     color = Color.DarkGray,
                     fontWeight = FontWeight.Bold
                 ),
